@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ismail — Full-Stack Developer</title>
+  <meta name="description" content="Ismail is a full-stack developer in Kenya building fast, reliable web apps with React, Node.js, Express and MongoDB." />
+  <meta name="theme-color" content="#060807" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="ismail.jpg" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: { DEFAULT: '#060807', 900: '#0a0d0b', 800: '#0f1311', 700: '#161b18' },
+            mint: { DEFAULT: '#86efac', 400: '#4ade80', 500: '#22c55e', 900: '#0c2a17' },
+            fog: { DEFAULT: '#e8ece9', muted: '#9aa59e', dim: '#6b766f' },
+          },
+          fontFamily: {
+            display: ['Montserrat', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html, body { overflow-x: clip; }
+    body { background: #060807; }
+    .glow-text { color: #a7f3c0; text-shadow: 0 0 18px rgba(74, 222, 128, .45), 0 0 42px rgba(34, 197, 94, .25); }
+    .grain::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .hero-photo {
+      -webkit-mask-image: radial-gradient(ellipse 62% 60% at 55% 45%, #000 45%, transparent 100%);
+      mask-image: radial-gradient(ellipse 62% 60% at 55% 45%, #000 45%, transparent 100%);
+    }
+    .btn-glow { box-shadow: 0 0 0 1px rgba(134, 239, 172, .35), 0 0 24px rgba(74, 222, 128, .28), inset 0 0 12px rgba(134, 239, 172, .12); }
+    .btn-glow:hover { box-shadow: 0 0 0 1px rgba(134, 239, 172, .6), 0 0 34px rgba(74, 222, 128, .45), inset 0 0 14px rgba(134, 239, 172, .18); }
+    .card-glow:hover { box-shadow: 0 0 0 1px rgba(134, 239, 172, .25), 0 20px 60px -20px rgba(34, 197, 94, .25); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .2, 1); }
+    .reveal.is-in { opacity: 1; transform: none; }
+    :focus-visible { outline: 2px solid #86efac; outline-offset: 3px; border-radius: 8px; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation: none !important; transition-duration: 0ms !important; }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-fog antialiased selection:bg-mint/30 selection:text-white">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-mint focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
+
+  <!-- ============ NAV ============ -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
+    <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-8" aria-label="Primary">
+      <a href="#home" class="font-display text-xl font-semibold tracking-tight text-white">Ismail<span class="text-mint">.</span></a>
+
+      <ul class="hidden items-center gap-1 md:flex">
+        <li><a href="#home" class="nav-link rounded-full px-4 py-2 text-sm text-fog-muted transition-colors duration-200 hover:text-white">Home</a></li>
+        <li><a href="#about" class="nav-link rounded-full px-4 py-2 text-sm text-fog-muted transition-colors duration-200 hover:text-white">About</a></li>
+        <li><a href="#services" class="nav-link rounded-full px-4 py-2 text-sm text-fog-muted transition-colors duration-200 hover:text-white">Services</a></li>
+        <li><a href="#portfolio" class="nav-link rounded-full px-4 py-2 text-sm text-fog-muted transition-colors duration-200 hover:text-white">Portfolio</a></li>
+        <li><a href="#contact" class="ml-2 rounded-full border border-mint/30 px-4 py-2 text-sm text-mint transition-colors duration-200 hover:bg-mint/10">Contact</a></li>
+      </ul>
+
+      <button id="menuBtn" type="button" class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-white md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 9h14M9 15h10" /></svg>
+      </button>
+    </nav>
+
+  </header>
+
+  <!-- mobile menu (outside header so backdrop-filter does not trap it) -->
+  <div id="mobileMenu" class="pointer-events-none fixed inset-0 z-[55] flex flex-col bg-ink/95 opacity-0 backdrop-blur-xl transition-opacity duration-300 md:hidden" aria-hidden="true">
+    <div class="flex h-20 items-center justify-between px-4">
+      <span class="font-display text-xl font-semibold text-white">Ismail<span class="text-mint">.</span></span>
+      <button id="menuClose" type="button" class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-white" aria-label="Close menu">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+    </div>
+    <ul class="flex flex-1 flex-col justify-center gap-2 px-8 pb-24">
+      <li><a href="#home" class="menu-link block py-3 font-display text-4xl font-semibold text-white">Home</a></li>
+      <li><a href="#about" class="menu-link block py-3 font-display text-4xl font-semibold text-white">About</a></li>
+      <li><a href="#services" class="menu-link block py-3 font-display text-4xl font-semibold text-white">Services</a></li>
+      <li><a href="#portfolio" class="menu-link block py-3 font-display text-4xl font-semibold text-white">Portfolio</a></li>
+      <li><a href="#contact" class="menu-link block py-3 font-display text-4xl font-semibold text-mint">Contact</a></li>
+    </ul>
+  </div>
+
+  <main id="main">
+    <!-- ============ HOME / HERO ============ -->
+    <section id="home" class="grain relative isolate overflow-hidden">
+      <!-- green glow behind portrait -->
+      <div class="pointer-events-none absolute -z-10 right-[-10%] top-[8%] h-[620px] w-[620px] rounded-full bg-mint-500/20 blur-[120px] md:right-[8%]" aria-hidden="true"></div>
+
+      <div class="mx-auto grid min-h-[100svh] max-w-7xl items-center gap-6 px-4 pb-12 pt-24 sm:px-8 md:grid-cols-2 md:gap-0 md:pt-20">
+        <div class="relative z-10 order-2 md:order-1">
+          <p class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[.03] px-3 py-1.5 font-mono text-xs text-fog-muted">
+            <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint-400 opacity-60"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-mint-400"></span></span>
+            Full-Stack Developer · MERN
+          </p>
+
+          <h1 class="reveal font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Building web apps that drive <span class="glow-text">results</span>
+          </h1>
+
+          <p class="reveal mt-6 max-w-lg text-base leading-relaxed text-fog-muted sm:text-lg">
+            Hey, I’m Ismail. I build full-stack web applications with React, Node.js and MongoDB, from secure auth and clean database design to UI people enjoy using.
+          </p>
+
+          <div class="reveal mt-9 flex flex-wrap items-center gap-3">
+            <a href="#contact" class="btn-glow inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-mint-900/60 px-6 text-sm font-medium text-mint transition-all duration-200">
+              Get in touch
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z" /></svg>
+            </a>
+            <a href="#portfolio" class="inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-white/10 bg-white/[.03] px-6 text-sm font-medium text-white transition-colors duration-200 hover:border-white/20 hover:bg-white/[.06]">
+              See my work
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+            </a>
+          </div>
+
+          <ul class="reveal mt-12 flex flex-wrap gap-x-7 gap-y-3 text-sm text-fog-muted">
+            <li class="flex items-center gap-2">
+              <svg class="h-4 w-4 text-mint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              Available for work
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="h-4 w-4 text-mint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></svg>
+              BSc Information Science, 2025
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="h-4 w-4 text-mint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z" /><circle cx="12" cy="10" r="3" /></svg>
+              Kenya
+            </li>
+          </ul>
+        </div>
+
+        <div class="relative order-1 mx-auto w-full max-w-[340px] sm:max-w-[420px] md:order-2 md:max-w-none">
+          <img src="ismail.jpg" alt="Portrait of Ismail" width="1000" height="1000" fetchpriority="high"
+               class="hero-photo aspect-square w-full object-cover md:scale-110" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="relative scroll-mt-20 border-t border-white/5 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+        <div class="grid gap-14 lg:grid-cols-12">
+          <div class="lg:col-span-5">
+            <p class="reveal font-mono text-xs uppercase tracking-[.2em] text-mint">01 · About</p>
+            <h2 class="reveal mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl">
+              Engineer by training, builder by habit.
+            </h2>
+            <p class="reveal mt-6 text-base leading-relaxed text-fog-muted sm:text-lg">
+              I hold a Bachelor’s in Information Science from Garissa University (2025). I work across the stack: designing database schemas, writing auth flows in Express, and building modular React interfaces with TypeScript and Tailwind.
+            </p>
+            <p class="reveal mt-4 text-base leading-relaxed text-fog-muted sm:text-lg">
+              I also bring a designer’s eye from branding and UI work for commercial launches, plus hands-on networking training through Huawei Kenya’s Datacom programme.
+            </p>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2 lg:col-span-7">
+            <!-- education -->
+            <article class="reveal rounded-2xl border border-white/[.07] bg-ink-800 p-6 sm:col-span-2">
+              <div class="flex items-start gap-4">
+                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-mint/10 text-mint">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></svg>
+                </div>
+                <div>
+                  <h3 class="font-display text-lg font-semibold text-white">Bachelor in Information Science</h3>
+                  <p class="mt-1 text-sm text-fog-muted">Garissa University · Graduated 2025</p>
+                </div>
+              </div>
+            </article>
+
+            <!-- core stack -->
+            <article class="reveal rounded-2xl border border-white/[.07] bg-ink-800 p-6">
+              <h3 class="font-mono text-xs uppercase tracking-[.18em] text-fog-dim">Core stack</h3>
+              <ul class="mt-4 flex flex-wrap gap-2">
+                <li class="rounded-lg border border-mint/20 bg-mint/[.06] px-3 py-1.5 text-sm text-mint">JavaScript</li>
+                <li class="rounded-lg border border-mint/20 bg-mint/[.06] px-3 py-1.5 text-sm text-mint">TypeScript</li>
+                <li class="rounded-lg border border-mint/20 bg-mint/[.06] px-3 py-1.5 text-sm text-mint">React</li>
+                <li class="rounded-lg border border-mint/20 bg-mint/[.06] px-3 py-1.5 text-sm text-mint">Node.js</li>
+                <li class="rounded-lg border border-mint/20 bg-mint/[.06] px-3 py-1.5 text-sm text-mint">Express</li>
+                <li class="rounded-lg border border-mint/20 bg-mint/[.06] px-3 py-1.5 text-sm text-mint">MongoDB</li>
+                <li class="rounded-lg border border-mint/20 bg-mint/[.06] px-3 py-1.5 text-sm text-mint">Tailwind CSS</li>
+              </ul>
+            </article>
+
+            <!-- tools -->
+            <article class="reveal rounded-2xl border border-white/[.07] bg-ink-800 p-6">
+              <h3 class="font-mono text-xs uppercase tracking-[.18em] text-fog-dim">Tools &amp; languages</h3>
+              <ul class="mt-4 flex flex-wrap gap-2">
+                <li class="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-fog">Git</li>
+                <li class="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-fog">GitHub</li>
+                <li class="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-fog">VS Code</li>
+                <li class="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-fog">Cursor</li>
+                <li class="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-fog">Claude Code</li>
+                <li class="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-fog">Python</li>
+                <li class="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-fog">SQL</li>
+                <li class="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-fog">Java</li>
+              </ul>
+            </article>
+
+            <!-- training -->
+            <article class="reveal rounded-2xl border border-white/[.07] bg-ink-800 p-6 sm:col-span-2">
+              <div class="flex items-start gap-4">
+                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-mint/10 text-mint">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8" /></svg>
+                </div>
+                <div>
+                  <h3 class="font-display text-lg font-semibold text-white">Huawei Kenya Datacom Elite Partner Training</h3>
+                  <p class="mt-1 text-sm leading-relaxed text-fog-muted">Hands-on labs and advanced networking schedules covering enterprise datacom configuration.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section id="services" class="relative overflow-hidden scroll-mt-20 border-t border-white/5 py-24 sm:py-32">
+      <div class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-mint-500/[.07] blur-[120px]" aria-hidden="true"></div>
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+        <div class="max-w-2xl">
+          <p class="reveal font-mono text-xs uppercase tracking-[.2em] text-mint">02 · Services</p>
+          <h2 class="reveal mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl">What I can build for you</h2>
+          <p class="reveal mt-5 text-base leading-relaxed text-fog-muted sm:text-lg">From the first sketch to a deployed product, one developer who can own the whole thing.</p>
+        </div>
+
+        <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="reveal card-glow group rounded-2xl border border-white/[.07] bg-ink-800 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-mint/25">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mint/10 text-mint">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16" /></svg>
+            </div>
+            <h3 class="mt-6 font-display text-lg font-semibold text-white">Full-stack web apps</h3>
+            <p class="mt-3 text-sm leading-relaxed text-fog-muted">End-to-end MERN applications: planning, building, and shipping a working product.</p>
+          </article>
+
+          <article class="reveal card-glow group rounded-2xl border border-white/[.07] bg-ink-800 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-mint/25">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mint/10 text-mint">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" /></svg>
+            </div>
+            <h3 class="mt-6 font-display text-lg font-semibold text-white">Frontend &amp; React UI</h3>
+            <p class="mt-3 text-sm leading-relaxed text-fog-muted">Responsive, accessible interfaces built from modular React + TypeScript components and Tailwind.</p>
+          </article>
+
+          <article class="reveal card-glow group rounded-2xl border border-white/[.07] bg-ink-800 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-mint/25">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mint/10 text-mint">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5v14a9 3 0 0 0 18 0V5" /><path d="M3 12a9 3 0 0 0 18 0" /></svg>
+            </div>
+            <h3 class="mt-6 font-display text-lg font-semibold text-white">APIs &amp; databases</h3>
+            <p class="mt-3 text-sm leading-relaxed text-fog-muted">REST APIs in Node &amp; Express, authentication, and MongoDB / SQL schema design.</p>
+          </article>
+
+          <article class="reveal card-glow group rounded-2xl border border-white/[.07] bg-ink-800 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-mint/25">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mint/10 text-mint">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg>
+            </div>
+            <h3 class="mt-6 font-display text-lg font-semibold text-white">Branding &amp; UI design</h3>
+            <p class="mt-3 text-sm leading-relaxed text-fog-muted">Brand assets, UI templates, promo scripts and digital business cards for product launches.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PORTFOLIO ============ -->
+    <section id="portfolio" class="relative scroll-mt-20 border-t border-white/5 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+          <div class="max-w-2xl">
+            <p class="reveal font-mono text-xs uppercase tracking-[.2em] text-mint">03 · Portfolio</p>
+            <h2 class="reveal mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl">Selected work</h2>
+          </div>
+          <!-- TODO: replace with your GitHub profile URL -->
+          <a href="https://github.com/your-username" target="_blank" rel="noopener" class="reveal inline-flex min-h-[44px] items-center gap-2 text-sm text-fog-muted transition-colors duration-200 hover:text-mint">
+            More on GitHub
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
+          </a>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-5">
+          <!-- Relay (featured) -->
+          <article class="reveal card-glow group overflow-hidden rounded-3xl border border-white/[.07] bg-ink-800 transition-all duration-300 hover:border-mint/25 lg:col-span-3">
+            <!-- CSS mockup of the app (swap for a real screenshot when ready) -->
+            <div class="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-mint-900/70 via-ink-900 to-ink-900 p-6 sm:p-8" aria-hidden="true">
+              <div class="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-mint-500/20 blur-3xl"></div>
+              <div class="relative h-full rounded-xl border border-white/10 bg-ink/80 shadow-2xl transition-transform duration-500 group-hover:-translate-y-1">
+                <div class="flex items-center gap-1.5 border-b border-white/5 px-4 py-3">
+                  <span class="h-2.5 w-2.5 rounded-full bg-white/15"></span><span class="h-2.5 w-2.5 rounded-full bg-white/15"></span><span class="h-2.5 w-2.5 rounded-full bg-white/15"></span>
+                  <span class="ml-3 font-mono text-[11px] text-fog-dim">relay.app</span>
+                </div>
+                <div class="grid h-[calc(100%-41px)] grid-cols-[30%_1fr]">
+                  <div class="space-y-2.5 border-r border-white/5 p-4">
+                    <div class="h-2 w-3/4 rounded bg-mint/40"></div>
+                    <div class="h-2 w-1/2 rounded bg-white/10"></div>
+                    <div class="h-2 w-2/3 rounded bg-white/10"></div>
+                    <div class="h-2 w-1/2 rounded bg-white/10"></div>
+                  </div>
+                  <div class="flex items-center justify-center p-4">
+                    <div class="w-full max-w-[220px] space-y-3 rounded-lg border border-white/10 bg-ink-800 p-4">
+                      <div class="mx-auto h-2.5 w-1/2 rounded bg-white/25"></div>
+                      <div class="h-7 rounded-md border border-white/10"></div>
+                      <div class="h-7 rounded-md border border-white/10"></div>
+                      <div class="h-7 rounded-md bg-mint/70"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-7 sm:p-8">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-md bg-mint/10 px-2 py-1 font-mono text-[11px] text-mint">Full-stack</span>
+                <span class="font-mono text-[11px] text-fog-dim">React · Node · Express · MongoDB</span>
+              </div>
+              <h3 class="mt-4 font-display text-2xl font-semibold text-white">Relay</h3>
+              <p class="mt-3 max-w-xl text-sm leading-relaxed text-fog-muted sm:text-base">
+                A full-stack web application with custom authentication routes, structured MongoDB schemas, and a modular React frontend built from reusable UI components.
+              </p>
+              <!-- TODO: replace with the Relay repo / live URL -->
+              <a href="https://github.com/your-username/relay" target="_blank" rel="noopener" class="mt-6 inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-mint transition-colors duration-200 hover:text-white">
+                View project
+                <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+              </a>
+            </div>
+          </article>
+
+          <div class="grid gap-6 lg:col-span-2">
+            <!-- Scanning Global & Skylink -->
+            <article class="reveal card-glow rounded-3xl border border-white/[.07] bg-ink-800 p-7 transition-all duration-300 hover:border-mint/25 sm:p-8">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mint/10 text-mint">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg>
+              </div>
+              <div class="mt-5 flex flex-wrap gap-2">
+                <span class="rounded-md bg-mint/10 px-2 py-1 font-mono text-[11px] text-mint">Branding</span>
+                <span class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-fog-muted">UI templates</span>
+              </div>
+              <h3 class="mt-4 font-display text-xl font-semibold text-white">Scanning Global &amp; Skylink Global Travels</h3>
+              <p class="mt-3 text-sm leading-relaxed text-fog-muted">Branding assets, UI templates, promotional video scripts and digital business card mockups for two commercial platform launches.</p>
+            </article>
+
+            <!-- Datacom -->
+            <article class="reveal card-glow rounded-3xl border border-white/[.07] bg-ink-800 p-7 transition-all duration-300 hover:border-mint/25 sm:p-8">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mint/10 text-mint">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /><path d="M6 6h.01M6 18h.01" /></svg>
+              </div>
+              <div class="mt-5 flex flex-wrap gap-2">
+                <span class="rounded-md bg-mint/10 px-2 py-1 font-mono text-[11px] text-mint">Networking</span>
+                <span class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-fog-muted">Huawei</span>
+              </div>
+              <h3 class="mt-4 font-display text-xl font-semibold text-white">Datacom &amp; technical training</h3>
+              <p class="mt-3 text-sm leading-relaxed text-fog-muted">Advanced networking schedules and hands-on labs through the Huawei Kenya Datacom Elite Partner programme.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="relative scroll-mt-20 border-t border-white/5 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+        <div class="reveal relative overflow-hidden rounded-3xl border border-mint/15 bg-gradient-to-br from-mint-900/50 via-ink-800 to-ink-900 px-6 py-16 text-center sm:px-12 sm:py-20">
+          <div class="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-mint-500/25 blur-[100px]" aria-hidden="true"></div>
+          <p class="relative font-mono text-xs uppercase tracking-[.2em] text-mint">Let’s work together</p>
+          <h2 class="relative mx-auto mt-4 max-w-2xl font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl">
+            Have a project in mind? <span class="glow-text">Let’s talk.</span>
+          </h2>
+          <p class="relative mx-auto mt-5 max-w-lg text-base leading-relaxed text-fog-muted">Open to full-time roles, freelance projects and collaborations.</p>
+
+          <div class="relative mt-10 flex flex-wrap justify-center gap-3">
+            <!-- TODO: replace placeholder links with your real email / profiles -->
+            <a href="mailto:hello@example.com" class="btn-glow inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-mint-900/60 px-6 text-sm font-medium text-mint transition-all duration-200">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 6L2 7" /></svg>
+              Email me
+            </a>
+            <a href="https://github.com/your-username" target="_blank" rel="noopener" class="inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-white/10 bg-white/[.03] px-6 text-sm font-medium text-white transition-colors duration-200 hover:border-white/20 hover:bg-white/[.06]">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/your-username" target="_blank" rel="noopener" class="inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-white/10 bg-white/[.03] px-6 text-sm font-medium text-white transition-colors duration-200 hover:border-white/20 hover:bg-white/[.06]">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/5">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-8 text-sm text-fog-dim sm:flex-row sm:px-8">
+      <p>© <span id="year"></span> Ismail. Built with HTML &amp; Tailwind CSS.</p>
+      <a href="#home" class="inline-flex min-h-[44px] items-center gap-1.5 transition-colors duration-200 hover:text-mint">
+        Back to top
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Nav background once scrolled
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      const s = window.scrollY > 24;
+      nav.classList.toggle('bg-ink/80', s);
+      nav.classList.toggle('backdrop-blur-lg', s);
+      nav.classList.toggle('border-b', s);
+      nav.classList.toggle('border-white/5', s);
+    }, { passive: true });
+
+    // Mobile menu
+    const menu = document.getElementById('mobileMenu');
+    const menuBtn = document.getElementById('menuBtn');
+    const setMenu = (open) => {
+      menu.classList.toggle('opacity-0', !open);
+      menu.classList.toggle('pointer-events-none', !open);
+      menu.setAttribute('aria-hidden', String(!open));
+      menuBtn.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) document.getElementById('menuClose').focus(); else menuBtn.focus({ preventScroll: true });
+    };
+    menuBtn.addEventListener('click', () => setMenu(true));
+    document.getElementById('menuClose').addEventListener('click', () => setMenu(false));
+    menu.querySelectorAll('.menu-link').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false); });
+
+    // Active nav link
+    const links = document.querySelectorAll('.nav-link');
+    const sectionObs = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        links.forEach((l) => {
+          const active = l.getAttribute('href') === '#' + en.target.id;
+          l.classList.toggle('text-white', active);
+          l.classList.toggle('bg-white/5', active);
+          if (active) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main section').forEach((s) => sectionObs.observe(s));
+
+    // Reveal on scroll (skipped automatically for reduced motion via CSS)
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); revealObs.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = (el.closest('#home') ? i * 70 : 0) + 'ms';
+      revealObs.observe(el);
+    });
+  </script>
+</body>
+</html>
